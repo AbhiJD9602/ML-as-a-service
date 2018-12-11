@@ -1,0 +1,130 @@
+<div fxLayoutAlign="center center" fxLayout="column">
+  <h1>Win Quality Model</h1>
+  <h3>Train Classification Model</h3>
+  <div class="home__training">
+    <mat-card fxLayoutAlign="center center" fxLayout="column">
+      <h4>Set csv file path</h4>
+      <mat-input-container>
+        <input
+          matInput
+          name="Path"
+          placeholder="Path"
+          [(ngModel)]="dataLocation.path">
+      </mat-input-container>
+      <div>
+        <button md-raised-button (click)="trainModel()">
+          Train model
+        </button>
+      </div>
+    </mat-card>
+
+    <div *ngIf="trainingResult"
+         fxLayoutAlign="center center"
+         fxLayout="column">
+      <h4>Training Accuracy</h4>
+      <ngx-charts-linear-gauge
+        [view]="[300, 100]"
+        [value]="trainingResult.accuracy"
+        [scheme]="colorScheme"
+        [min]="0"
+        [max]="100"
+        [units]="'% accuracy'">
+      </ngx-charts-linear-gauge>
+    </div>
+  </div>
+
+  <div class="home__prediction"
+       fxLayoutAlign="center center"
+       fxLayout="column">
+    <h3>Predict Wine Quality</h3>
+
+    <mat-card fxLayoutAlign="center center" fxLayout="column">
+      <h4>Define Wine</h4>
+      <div fxLayout="row">
+        <mat-input-container>
+          <input matInput
+                 name="Fixed Acidity"
+                 placeholder="Fixed Acidity"
+                 [(ngModel)]="wineProperties.fixedAcidity">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Volatile Acidity"
+                 placeholder="Volatile Acidity"
+                 [(ngModel)]="wineProperties.volatileAcidity">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Citric Acid"
+                 placeholder="Citric Acid"
+                 [(ngModel)]="wineProperties.citricAcid">
+        </mat-input-container>
+      </div>
+      <div fxLayout="row">
+        <mat-input-container>
+          <input matInput
+                 name="Residual Sugar"
+                 placeholder="Residual Sugar"
+                 [(ngModel)]="wineProperties.residualSugar">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Chlorides"
+                 placeholder="Chlorides"
+                 [(ngModel)]="wineProperties.chlorides">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Free Sulphur Dioxide"
+                 placeholder="Free Sulphur Dioxide"
+                 [(ngModel)]="wineProperties.freeSulfurDioxide">
+        </mat-input-container>
+      </div>
+      <div fxLayout="row">
+        <mat-input-container>
+          <input matInput
+                 name="Total Sulphur Dioxide"
+                 placeholder="Total Sulphur Dioxide"
+                 [(ngModel)]="wineProperties.totalSulfurDioxide">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Density"
+                 placeholder="Density"
+                 [(ngModel)]="wineProperties.density">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="PH"
+                 placeholder="PH"
+                 [(ngModel)]="wineProperties.pH">
+        </mat-input-container>
+      </div>
+        <div fxLayout="row">
+        <mat-input-container>
+          <input matInput
+                 name="Sulphates"
+                 placeholder="Sulphates"
+                 [(ngModel)]="wineProperties.sulphates">
+        </mat-input-container>
+        <mat-input-container>
+          <input matInput
+                 name="Alcohol"
+                 placeholder="Alcohol"
+                 [(ngModel)]="wineProperties.alcohol">
+        </mat-input-container>
+      </div>
+      <div>
+        <button md-raised-button (click)="predictQuality()">Predict Quality</button>
+      </div>
+    </mat-card>
+
+    <div *ngIf="predictedResult"
+         fxLayoutAlign="center center"
+         fxLayout="column"
+         class="home__chart-container">
+      <h4>Prediction Result</h4>
+      <p *ngFor="let prediction of predictedResult">{{prediction.value}}</p>
+    </div>
+  </div>
+</div>
