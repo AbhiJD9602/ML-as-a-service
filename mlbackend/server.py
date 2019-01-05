@@ -15,11 +15,11 @@ PORT = 8081
 app = flask.Flask(__name__)
 
 
-@app.route('/api/train', methods=['POST'])
+@app.route('/api/train', methods=['GET'])
 def train():
     # get parameters from request
-    parameters = request.get_json()
-    path = parameters['path']
+    # parameters = request.get_json()
+    # path = parameters['path']
 
     # loading my data and splitting it into training and testing pandas
     df = pd.read_csv("wine_dataset.csv", delimiter=",")

@@ -14,7 +14,8 @@ export class HomeService {
   }
 
   public trainModel(dataLocation: DataLocation): Observable<any> {
-    return this.http.post(`${SERVER_URL}train`, dataLocation).map((response) => response);
+      return this.http.get(`${SERVER_URL}train`).map((response) => response);
+    //return this.http.post(`${SERVER_URL}train`, dataLocation).map((response) => response);
   }
 
   public predictQuality(wineProperties: WineProperties): Observable<any> {
